@@ -37,6 +37,10 @@ Expr Cost(Expr logits,
     cost = mean(sum(ce, axis = -3), axis = -2);
   }
 
+
+  // HK if we have a weight, use it here? 
+  //todo: check if this is per sentence / per words
+  cout << cost;
   return cost;
 }
 }
