@@ -40,7 +40,7 @@ Expr Cost(Expr logits,
 
   // HK if we have a weight, use it here? 
   //todo: check if this is per sentence / per words
-  cout << cost;
+  cout << "hk cost is: "<< cost << "\n";
   return cost;
 }
 }
