@@ -1,4 +1,6 @@
 #include "layers/generic.h"
+#include <typeinfo>
+
 
 namespace marian {
 
@@ -41,6 +43,8 @@ Expr Cost(Expr logits,
   // HK if we have a weight, use it here? 
   //todo: check if this is per sentence / per words
   std::cout << "hk cost is: "<< cost << "\n";
+  std::cout << "hk cost type: "<< typeid(cost).name()<< "\n\n";
+
   return cost;
 }
 }
