@@ -23,8 +23,11 @@ Expr Cost(Expr logits,
     ce = ce * mask;
   }
 
-  std::cout << "ce: "<< ce << "\n";
-  std::cout << "ce: "<< typeid(ce).name() << "\n";
+  std::cout << "hk ce: "<< ce << "\n";
+  std::cout << "hk ce: "<< typeid(ce).name() << "\n";
+
+  std::cout << "hk **ce: "<< **ce << "\n";
+  std::cout << "hk **ce: "<< typeid(**ce).name() << "\n";
 
 
   Expr cost;
@@ -63,6 +66,8 @@ Expr Cost(Expr logits,
   //todo: check if this is per sentence / per words
   std::cout << "hk cost is: "<< cost << "\n";
   std::cout << "hk cost type: "<< typeid(cost).name()<< "\n\n";
+  std::cout << "hk **cost is: "<< **cost << "\n";
+  std::cout << "hk **cost type: "<< typeid(**cost).name()<< "\n\n";
 
   return cost;
 }
