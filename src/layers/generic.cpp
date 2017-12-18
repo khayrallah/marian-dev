@@ -24,11 +24,15 @@ Expr Cost(Expr logits,
   }
 
   std::cout << "ce: "<< ce << "\n";
+  std::cout << "ce: "<< typeid(ce).name() << "\n";
+
 
   Expr cost;
   if(costType == "ce-mean" || costType == "cross-entropy") {
     cost = mean(sum(ce, axis = -3), axis = -2);
     std::cout << "hk cost is 1: "<< mean(sum(ce, axis = -3), axis = -2) << "\n";
+    std::cout << "hk cost type is 1: "<< typeid(mean(sum(ce, axis = -3), axis = -2) ).name()<< "\n\n";
+
 
   } else if(costType == "ce-mean-words") {
     cost
