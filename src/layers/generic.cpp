@@ -19,24 +19,39 @@ Expr Cost(Expr logits,
     ce = (1 - smoothing) * ce - smoothing * ceq;
   }
 
-  if(mask)
+  if(mask){
     ce = ce * mask;
+  }
+
+  std::cout << "ce: "<< ce << "\n";
 
   Expr cost;
   if(costType == "ce-mean" || costType == "cross-entropy") {
     cost = mean(sum(ce, axis = -3), axis = -2);
+    std::cout << "hk cost is 1: "<< mean(sum(ce, axis = -3), axis = -2) << "\n";
+
   } else if(costType == "ce-mean-words") {
     cost
         = sum(sum(ce, axis = -3), axis = -2) / sum(sum(mask, axis = -3), axis = -2);
+    std::cout << "hk cost is 2: "<< sum(sum(ce, axis = -3), axis = -2) / sum(sum(mask, axis = -3), axis = -2)<< "\n";
+
   } else if(costType == "ce-sum") {
     cost = sum(sum(ce, axis = -3), axis = -2);
+    std::cout << "hk cost is 3: "<< sum(sum(ce, axis = -3), axis = -2)<< "\n";
+
   } else if(costType == "perplexity") {
     cost = exp(sum(sum(ce, axis = -3), axis = -2)
                / sum(sum(mask, axis = -3), axis = -2));
+    std::cout << "hk cost is 4: "<< exp(sum(sum(ce, axis = -3), axis = -2) / sum(sum(mask, axis = -3), axis = -2))<< "\n";
+
   } else if(costType == "ce-rescore") {
     cost = -sum(ce, axis = -3);
+    std::cout << "hk cost is 5: "<< -sum(ce, axis = -3) << "\n";
+
   } else {  // same as ce-mean
     cost = mean(sum(ce, axis = -3), axis = -2);
+    std::cout << "hk cost is 6: "<< mean(sum(ce, axis = -3), axis = -2) << "\n";
+
   }
 
 
